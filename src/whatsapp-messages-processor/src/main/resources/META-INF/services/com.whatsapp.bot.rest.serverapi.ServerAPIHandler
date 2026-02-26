@@ -1,0 +1,3 @@
+com.whatsapp.bot.rest.serverapi.whatsappwebjsapi.WhatsappWebJsAPIHandler
+com.whatsapp.bot.rest.serverapi.officialwhatsappapi.OfficialWhatsappAPIHandler
+com.whatsapp.bot.rest.serverapi.baileys.BaileysAPIHandler
