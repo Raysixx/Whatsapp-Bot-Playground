@@ -97,6 +97,7 @@ class MessagesProcessor {
         strength = Collator.PRIMARY
     }
 
+    // TODO: Relacionar as perguntas com número do celular para que não cause bug caso o usuário mude de nome
     fun getMessageAnswer(message: ReceivedMessage, history: List<Persister.ChatHistoryEntry>): MessageAnswer? {
         val sender = message.notifyName ?: return null
 
@@ -153,6 +154,10 @@ class MessagesProcessor {
                     val lastHistoryQuestion = history.lastOrNull { it.fromMe }?.message
                         ?: return@run messageProcessorData.getInitialQuestion(sender).question
 
+                    // TODO: A string da pergunta em si pode se repetir mas fazer parte de outra etapa do fluxo e ter consequências diferentes (basicamente ser outro objeto de Question),
+                    //      precisa pegar a penúltima Question e aí encontrar a lastQuestion abaixo por ser igual ao lastHistoryQuestion AND seu id ser alguma das opções da penúltima Question.
+                    //      Vai precisar montar todo o histórico de Questions pois cada Question tem que ser achada dessa forma acima considerando a penúltima, porém eventualmente vai chegar no começo
+                    //      e não vai ser encontrada uma penúltima, aí sim poderia considerar a tal Question como certa (mesmo sem ter penúltima) e poderia começar a encontrar o resto com certeza (recursão ?)
                     val lastQuestion = userQuestions.first {
                         it.question == lastHistoryQuestion
                     }
@@ -178,6 +183,9 @@ class MessagesProcessor {
                             isLastAnswer = true
                             return@run getFinishAnswer(message, history, userQuestions)
                         }
+
+                        // TODO: O que fazer caso uma pergunta aponte a next como uma pergunta anterior que já foi respondida ?
+                        // TODO: O que fazer caso perguntas criem um loop infinito ao apontarem uma pra outra ?
 
                         if (nextQuestionId == lastQuestion.id) {
                             val questionWithOption = listOf(lastQuestion to listOf(selectedOption))

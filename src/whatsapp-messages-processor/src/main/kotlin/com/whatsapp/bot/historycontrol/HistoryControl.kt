@@ -8,6 +8,8 @@ import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 
+// TODO: Durante a inicialização, checar se a diferença entre o timestamp da última mensagem e o timestamp atual é maior do que o timeout, e resetar o chat se for. (Relevante pra persister com db)
+//  Não enviar mensagem avisando nesse caso acima (porque seria um cenário da aplicação ter caído e ter passado muito tempo desde a interação com o bot, ele não deveria sair spammando mensagens de timeout)
 class HistoryControl(private val sendMessageFunc: (ToSendMessage) -> Unit) {
     companion object {
         private const val WARN_ALMOST_TIMEOUT_WHEN_MISSING = 30L // Seconds
