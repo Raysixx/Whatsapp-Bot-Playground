@@ -96,6 +96,7 @@ class MessagesProcessor {
         strength = Collator.PRIMARY
     }
 
+    // TODO: Relacionar as perguntas com número do celular para que não cause bug caso o usuário mude de nome
     fun getMessageAnswer(message: ReceivedMessage, history: List<Persister.ChatHistoryEntry>): MessageAnswer? {
         val sender = message.notifyName ?: return null
 
@@ -174,6 +175,9 @@ class MessagesProcessor {
                             isLastAnswer = true
                             return@run getFinishAnswer(message, history, userQuestions)
                         }
+
+                        // TODO: O que fazer caso uma pergunta aponte a next como uma pergunta anterior que já foi respondida ?
+                        // TODO: O que fazer caso perguntas criem um loop infinito ao apontarem uma pra outra ?
 
                         if (nextQuestionId == lastQuestion.id) {
                             val questionWithOption = listOf(lastQuestion to listOf(selectedOption))
