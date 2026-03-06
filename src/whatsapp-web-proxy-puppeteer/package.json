@@ -1,0 +1,16 @@
+{
+  "name": "whatsapp-web-proxy",
+  "version": "0.1.0",
+  "description": "Standalone Node module for proxying WhatsApp Web connections (placeholder, no whatsapp-web.js usage yet).",
+  "main": "index.js",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.2.1",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.34.6"
+  }
+}

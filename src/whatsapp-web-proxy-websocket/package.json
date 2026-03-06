@@ -1,0 +1,17 @@
+{
+  "name": "whatsapp-web-proxy2",
+  "version": "0.1.0",
+  "description": "Standalone Node module for proxying WhatsApp Web connections using Baileys.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node start.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.2.1",
+    "@whiskeysockets/baileys": "^7.0.0-rc.9",
+    "qrcode-terminal": "^0.12.0"
+  }
+}
+
